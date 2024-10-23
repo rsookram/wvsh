@@ -1,10 +1,12 @@
 package io.github.rsookram.wvsh;
 
 import android.app.Activity;
+import android.graphics.Insets;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.WindowInsets;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -39,6 +41,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        findViewById(android.R.id.content).setOnApplyWindowInsetsListener((v, insets) -> {
+            Insets systemInsets = insets.getInsets(WindowInsets.Type.systemBars());
+            v.setPadding(systemInsets.left, systemInsets.top, systemInsets.right, systemInsets.bottom);
+            return insets;
+        });
 
         this.webView = findViewById(R.id.webview);
 
